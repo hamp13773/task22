@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 public class SpawnPoints : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemy;
-    [SerializeField] private GameObject[] _spawnPositions;
+    [SerializeField] private Enemy _enemy;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private float _objectCount;
 
+    private Spawner[] _spawnPositions;
     private int _currentIndex;
+
     private void OnEnable()
     {
+        _spawnPositions = GetComponentsInChildren<Spawner>();
         StartCoroutine(SpawnEnemy());
     }
+
     private IEnumerator SpawnEnemy()
     {
         while (_objectCount != 0)
